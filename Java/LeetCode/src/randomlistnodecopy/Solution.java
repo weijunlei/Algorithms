@@ -1,4 +1,4 @@
-package RandomListNode;
+package randomlistnodecopy;
 
 public class Solution {
     public class RandomListNode {
