@@ -320,3 +320,5 @@ __pycache__/
 
 # My Ignore
 *.sln
+*.vcxproj
+*.vcxproj.filters
