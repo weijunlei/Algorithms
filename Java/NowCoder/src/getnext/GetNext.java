@@ -10,6 +10,7 @@ public class GetNext {
             return pNode;
         }
 
+        // 需要注意中序遍历的非简单结果
         if (pNode.right != null){
             pNode = pNode.right;
             while (pNode.left != null){
