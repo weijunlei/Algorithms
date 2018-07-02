@@ -10,14 +10,25 @@ public class DeleteDuplication {
             return pHead;
         }
 
-        ListNode pre = pHead;
-        ListNode temp = pHead;
-        ListNode result = null;
-        while(pre != null){
-            while(temp.val == pre.val){
-                temp = temp.next;
-            }
+        ListNode result = new ListNode(0);
+        result.next = pHead;
+        ListNode cur = pHead;
+        ListNode pre = result;
 
+        while(cur != null && cur.next != null){
+            if (cur.val == cur.next.val){
+                int curVal = cur.val;
+                while(cur != null && cur.val == curVal){
+                    cur = cur.next;
+                }
+                pre.next = cur;
+            }
+            else{
+                pre = cur;
+                cur = cur.next;
+            }
         }
+
+        return result.next;
     }
 }
