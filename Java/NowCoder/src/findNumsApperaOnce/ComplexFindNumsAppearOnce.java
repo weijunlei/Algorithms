@@ -1,4 +1,4 @@
-package FindNumsApperaOnce;
+package findNumsApperaOnce;
 
 import java.util.HashMap;
 
