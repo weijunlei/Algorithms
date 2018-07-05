@@ -1,6 +1,5 @@
 # depslib dependency file v1.0
-1530778348 source:d:\myprogram\myjava\algorithms\myc\mastertest\mastertest\main.cpp
+1530789198 source:d:\myprogram\myjava\algorithms\myc\mastertest\mastertest\main.cpp
 	<iostream>
-	<vector>
-	<string>
+	<cmath>
 
