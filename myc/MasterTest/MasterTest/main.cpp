@@ -1,25 +1,21 @@
 #include <iostream>
-#include <cmath>
+#define MAXNUM 1000001
 
 using namespace std;
 int main(){
-    long num;
-    while (cin >> num){
-        int primeFactorCount = 0;
-        long sqrtNum = sqrt(num);
-        for(int i = 2; i <= sqrtNum; i++){
-            while(num % i == 0){
-                num = num / i;
-                primeFactorCount ++;
-            }
-            if (num <= 1){
-                break;
-            }
+    int n;
+    int result[MAXNUM];
+    result[0] = 1;
+    result[1] = 1;
+    for(int i = 2; i < MAXNUM; i ++){
+        if ( i % 2 == 0){
+            result[i] = (result[i - 1] + result[i / 2]) % 1000000000;
         }
-        if (num > 1){
-            primeFactorCount ++;
+        else{
+            result[i] = result[i - 1] % 1000000000;
         }
-        cout << primeFactorCount;
     }
-    return 0;
+    while(cin >> n){
+        cout << result[n];
+    }
 }
