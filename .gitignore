@@ -322,3 +322,6 @@ __pycache__/
 *.sln
 *.vcxproj
 *.vcxproj.filters
+*.exe
+*.o
+*.O
