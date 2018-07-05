@@ -2,7 +2,6 @@
 #include <cmath>
 
 using namespace std;
-bool isPrimeFactor(int num);
 int main(){
     long num;
     while (cin >> num){
