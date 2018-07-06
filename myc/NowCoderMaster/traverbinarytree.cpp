@@ -29,6 +29,22 @@ void inOrderTraversal(TreeNode* root){
     inOrderTraversal(root->right);
 }
 
+void deleteTreeNode(TreeNode *root){
+    if (root == NULL){
+        return;
+    }
+    if (root -> left != NULL){
+        deleteTreeNode(root -> left);
+        root -> left = NULL;
+    }
+    if (root -> right != NULL){
+        deleteTreeNode(root -> right);
+        root -> left = NULL;
+    }
+    delete root;
+    root = NULL;
+}
+
 int main(){
     string str;
     index = 0;
@@ -36,5 +52,7 @@ int main(){
         TreeNode *root = createTree(str);
         inOrderTraversal(root);
         cout << endl;
+        index = 0;
+        deleteTreeNode(root);
     }
 }

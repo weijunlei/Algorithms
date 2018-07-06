@@ -49,7 +49,6 @@ int main(){
     string str;
     index = 0;
     while (cin >> str){
-        cout << str;
         TreeNode *root = createTree(str);
         inOrderTraversal(root);
         cout << endl;
