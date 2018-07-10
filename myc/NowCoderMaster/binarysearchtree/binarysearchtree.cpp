@@ -10,7 +10,7 @@ int loc;
 
 TreeNode* createTreeNode(){
     Node[loc].lChild = Node[loc].rChild = NULL;
-    return &Node[loc];
+    return &Node[loc++];
 }
 
 
@@ -19,7 +19,7 @@ TreeNode* buildBSTree(TreeNode *root, int val){
     TreeNode *newNode = createTreeNode();
     newNode->val = val;
     while (pre != NULL){
-        if (pre->val >= val){
+        if (pre->val <= val){
             if (pre->rChild == NULL){
                 pre ->rChild = newNode;
                 break;
@@ -54,6 +54,26 @@ void preTravel(TreeNode *root){
     }
 }
 
+void inTravel(TreeNode *root){
+    if (root ->lChild != NULL){
+        inTravel(root ->lChild);
+    }
+    printf("%d ", root->val);
+    if (root -> rChild != NULL){
+        inTravel(root ->rChild);
+    }
+}
+
+void postTravel(TreeNode *root){
+    if (root -> lChild != NULL){
+        postTravel(root ->lChild);
+    }
+    if (root ->rChild != NULL){
+        postTravel(root ->rChild);
+    }
+    printf("%d ", root -> val);
+}
+
 int main(){
     int n;
     while(scanf("%d", &n)){
@@ -67,6 +87,11 @@ int main(){
             root = buildBSTree(root, nums[i]);
         }
         preTravel(root);
-        printf("Hello World!\n");
+        printf("\n");
+        inTravel(root);
+        printf("\n");
+        postTravel(root);
+        printf("\n");
+        //printf("Hello World!\n");
     }
 }

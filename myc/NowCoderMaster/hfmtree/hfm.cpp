@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-void minHeap(int* nums, int length, int i){
+void minHeap(int* nums, int length, int i){// 保持最小堆结构
     int left = 2 * i + 1;
     int right = 2 * i + 2;
     int largest = i;
@@ -18,14 +18,14 @@ void minHeap(int* nums, int length, int i){
     }
 }
 
-void buildMinHeap(int *nums, int length){
+void buildMinHeap(int *nums, int length){ // 建立最小堆
     int halfLength = (int)length / 2 - 1;
     for(int i = halfLength; i >= 0; i--){
         minHeap(nums, length, i);
     }
 }
 
-int getNum(int* nums, int& length, int& isTwo){
+int getNum(int* nums, int& length, int& isTwo){// 根据获取的顺序决定堆的长度
     int topNum = nums[0];
     if (isTwo == 0){
         nums[0] = nums[length - 1];
