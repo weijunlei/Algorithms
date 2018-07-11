@@ -1,68 +1,109 @@
 #include <stdio.h>
 #include <string.h>
 
+char inputNames[50][20];
+char outputNames[50][20];
+int inputSize;
+int outputSize;
+
+
+bool isOnlyNum(char* temp, int tempLength){
+	int i;
+	for(i = 0; i < tempLength; i++){
+		if (temp[i] < '0' || temp[i] > '9'){
+			break;
+		}
+	}
+	if (i == tempLength){
+		return true;
+	}
+	else{
+		return false;
+	}
+}
+
+void addOutput(char *str){
+	bool shouldAdd = true;;
+	for(int i = 0; i < inputSize; i++){
+		if (strcmp(str, inputNames[i]) == 0){
+			shouldAdd = false;
+			break;
+		}
+	}
+
+	for(int i = 0; i < outputSize; i++){
+		if (strcmp(str, outputNames[i]) == 0){
+			shouldAdd = false;
+			break;
+		}
+	}
+
+	if (shouldAdd){
+        //printf("Added: %s\n", str);
+		strcpy(outputNames[outputSize++], str);
+	}
+}
+
 int main(){
-    char firstLine[100][20];
-    char secondLine[100][20];
-    char firstChs[1000];
-    char secondChs[1000];
-    int firstNum = 0;
-    int secondNum = 0;
-    int ch1Size = 0;
-    int ch2Size = 0;
+	char inputLines[2000];
+	int linesSize = 0;
+	inputSize = 0;
+	outputSize = 0;
 
-    char ch;
-    while(scanf("%c", &ch) != EOF && ch != '\n'){
-        firstChs[ch1Size++] = ch;
-    }
-    firstChs[ch1Size] = 0;
-    while(scanf("%c", &ch) != EOF && ch != '\n'){
-        secondChs[ch2Size++] = ch;
-    }
-    secondChs[ch2Size] = 0;
+	char ch;
+	int isNextLine = 0;
+	while(scanf("%c", &ch) != EOF && isNextLine != 2){
+		inputLines[linesSize++] = ch;
+		if (ch == ';'){
+			isNextLine ++;
+		}
+	}
 
-    bool isWord = false;
-    char temp[20];
-    int tempLength = 0;
-    for(int i = 0; i < ch1Size; i++){
-        char tempCh = firstChs[i];
-        if ((tempCh >= 'a' && tempCh <= 'z') || (tempCh >= 'A' && tempCh <= 'Z') || (tempCh == '_') || (tempCh >= '0' && tempCh <= '9')){
-            temp[tempLength++] = tempCh;
-            temp[tempLength] = 0;
-            isWord = true;
-        }
-        else if(isWord){
-            strcpy(firstLine[firstNum++], temp);
-            isWord = false;
-            tempLength = 0;
-        }
-        if (tempCh == ';'){
-            break;
-        }
-    }
+	int index = 0;
+	char temp[20];
+	int tempLength = 0;
+	bool isWord = false;
+	for(index = 0; inputLines[index] != '\n'; index++){
+		ch = inputLines[index];
+		if ((ch >= 'A' && ch <= 'Z') || (ch >= 'a' && ch <= 'z') || ch == '_' || (ch >= '0' && ch <= '9')){
+			temp[tempLength++] = ch;
+			temp[tempLength] = 0;
+			isWord = true;
+		}
+		else if (isWord){
+			if (!isOnlyNum(temp, tempLength)){
+				strcpy(inputNames[inputSize++], temp);
+			}
+			isWord = false;
+			tempLength = 0;
+		}
+	}
+    /*
+	for(int i = 0; i < inputSize; i++){
+        printf("InputName: %s\n", inputNames[i]);
+	}*/
+    isWord = false;
+    tempLength = 0;
+	for(index = index + 1; index < linesSize && inputLines[index] != '\n'; index++){
+		ch = inputLines[index];
+		if ((ch >= 'A' && ch <= 'Z') || (ch >= 'a' && ch <= 'z') || ch == '_' || (ch >= '0' && ch <= '9')){
+			temp[tempLength++] = ch;
+			temp[tempLength] = 0;
+			isWord = true;
+		}
+		else if(isWord){
+            //printf("someJudge Str: %s\n", temp);
+			if (!isOnlyNum(temp, tempLength)){
+				addOutput(temp);
+			}
+			isWord = false;
+			tempLength = 0;
+		}
+	}
 
-    for(int i = 0; i < ch2Size; i++){
-        char tempCh = secondChs[i];
-        if ((tempCh >= 'a' && tempCh <= 'z') || (tempCh >= 'A' && tempCh <= 'Z') || (tempCh == '_') || (tempCh >= '0' && tempCh <= '9')){
-            temp[tempLength++] = tempCh;
-            temp[tempLength] = 0;
-            isWord = true;
-        }
-        else if(isWord){
-            strcpy(secondLine[secondNum++], temp);
-            isWord = false;
-            tempLength = 0;
-        }
-        if (tempCh == ';'){
-            break;
-        }
-    }
+	for(int i = 0; i < outputSize; i++){
+		printf("%s\n", outputNames[i]);
+	}
 
-    for(int i = 0; i < firstNum; i++){
-        printf("%s\n", firstLine[i]);
-    }
-    printf("Hello World\n\n");
-    for(int i = 0; i < secondNum; i++){
-        printf("%s\n", secondLine[i]);
-    }
+	return 0;
 }
