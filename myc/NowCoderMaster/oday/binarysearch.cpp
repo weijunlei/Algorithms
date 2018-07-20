@@ -6,7 +6,7 @@ struct TreeNode{
     char ch;
     TreeNode *left;
     TreeNode *right;
-}nodes[50];
+}nodes[54];
 
 char chs1[26];
 char chs2[26];

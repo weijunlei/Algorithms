@@ -4,5 +4,21 @@ int main(){
     long long a, b;
     int m;
 
-    while(scanf("%d", ))
+    while(scanf("%d", &m) != EOF){
+        if (m == 0)
+            break;
+        scanf("%lld%lld", &a, &b);
+        a = a + b;
+        int ans[50];
+        int ansLength = 0;
+
+        do{
+            ans[ansLength++] = a % m;
+            a /= m;
+        }while(a != 0);
+        for(int i = ansLength - 1; i >= 0; i--){
+            printf("%d", ans[i]);
+        }
+        printf("\n");
+    }
 }
