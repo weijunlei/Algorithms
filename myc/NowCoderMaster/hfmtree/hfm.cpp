@@ -53,6 +53,9 @@ int main(){
         }
         buildMinHeap(nums, numLength);
         int isTwo = 0;
+        if (numLength == 1){
+            minHFM = nums[0];
+        }
         while(numLength > 1){
             int a = getNum(nums, numLength, isTwo);
             int b = getNum(nums, numLength, isTwo);

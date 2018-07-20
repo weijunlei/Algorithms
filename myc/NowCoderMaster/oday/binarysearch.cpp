@@ -6,7 +6,7 @@ struct TreeNode{
     char ch;
     TreeNode *left;
     TreeNode *right;
-}nodes[54];
+}nodes[50];
 
 char chs1[26];
 char chs2[26];
@@ -23,11 +23,11 @@ TreeNode* rebuildTree(int left1, int right1, int left2, int right2){
     int rootIndex = left2;
     for(int i = left2; i <= right2; i++){
         if (chs2[i] == chs1[left1]){
-            rootIndex = i;
+            rootIndex == i;
             break;
         }
     }
-    //printf("%d\n", rootIndex);
+
     int leftLength = rootIndex - left2;
     int rightLength = right2 - rootIndex;
     if (leftLength > 0){
@@ -54,7 +54,7 @@ void travelBinary(TreeNode* root){
 }
 
 int main(){
-   //printf("Hello World\n");
+    printf("Hello World\n");
     while(scanf("%s%s", chs1, chs2) != EOF){
         nodeNum = 0;
         int right1 = strlen(chs1) - 1;
