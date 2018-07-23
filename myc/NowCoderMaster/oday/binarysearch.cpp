@@ -31,11 +31,9 @@ TreeNode* rebuildTree(int left1, int right1, int left2, int right2){
     int leftLength = rootIndex - left2;
     int rightLength = right2 - rootIndex;
     if (leftLength > 0){
-        //printf("Left\n");
         root->left = rebuildTree(left1 + 1, left1 + leftLength, left2, rootIndex - 1);
     }
     if (rightLength > 0){
-        //printf("Right\n");
         root->right = rebuildTree(left1 + leftLength + 1, right1, rootIndex + 1, right2);
     }
     return root;
@@ -54,7 +52,6 @@ void travelBinary(TreeNode* root){
 }
 
 int main(){
-    printf("Hello World\n");
     while(scanf("%s%s", chs1, chs2) != EOF){
         nodeNum = 0;
         int right1 = strlen(chs1) - 1;
