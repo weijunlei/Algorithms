@@ -7,6 +7,6 @@ package longestpalindrome;
 public class Main {
     public static void main(String[] args){
         LongestPalidrome longestPalidrome = new LongestPalidrome();
-        System.out.printf(longestPalidrome.longestPalindrome("babad"));
+        System.out.printf(longestPalidrome.longestPalindrome("cbbd"));
     }
 }
