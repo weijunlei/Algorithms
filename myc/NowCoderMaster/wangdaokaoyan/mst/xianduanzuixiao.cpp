@@ -1,102 +1,93 @@
+// magicbfs.cpp: implementation of the magicbfs class.
+//
+//////////////////////////////////////////////////////////////////////
+
+#include "magicbfs.h"
+
+//////////////////////////////////////////////////////////////////////
+// Construction/Destruction
+//////////////////////////////////////////////////////////////////////
+
 #include <stdio.h>
-#include <math.h>
+#include <queue>
 
-double points[100][2];
+using namespace std;
 
-struct Edge{
-    int sIndex;
-    int eIndex;
-    double length;
-}edges[5001];
+bool mark[50][50][50];
+int maze[50][50][50];
 
-int Tree[5001];
+struct N{
+    int x, y , z;
+    int t;
+};
 
-int findRoot(int x){
-    if(Tree[x] == -1){
-        return x;
-    }
-    else{
-        int temp = findRoot(Tree[x]);
-        Tree[x] = temp;
-        return temp;
-    }
-}
+queue<N> Q;
 
-double getInstance(int m, int n){
-    double instance = sqrt((points[m][0] - points[n][0]) * (points[m][0] - points[n][0]) +\
-                            (points[m][1] - points[n][1])*(points[m][1] - points[n][1]));
-    return instance;
-}
+int go[][3] = {
+    1, 0, 0,
+    -1, 0, 0,
+    0, 1, 0,
+    0, -1, 0,
+    0, 0 , 1,
+    0, 0 , -1
+};
 
-void swap(int m, int n){
-    int tempS = edges[m].sIndex;
-    int tempE = edges[m].eIndex;
-    double tempLength = edges[m].length;
-    edges[m].sIndex = edges[n].sIndex;
-    edges[m].eIndex = edges[n].eIndex;
-    edges[m].length = edges[n].length;
-    edges[n].sIndex = tempS;
-    edges[n].eIndex = tempE;
-    edges[n].length = tempLength;
-}
 
-int getPartition(int left, int right){
-    double getLength = edges[left].length;
-    int getIndex = left;
-    for(int i = left + 1; i <= right; i++){
-        if (getLength > edges[i].length){
-            getIndex ++;
-            swap(getIndex, i);
+int BFS(int a, int b, int c){
+    while(Q.empty() == false){
+        N now = Q.front();
+        Q.pop();
+        for(int i = 0; i < 6; i++){
+            int nx = now.x + go[i][0];
+            int ny = now.y + go[i][1];
+            int nz = now.z + go[i][2];
+            
+            if (nx < 0 || nx >= a || ny < 0 || ny >= b || nz < 0 || nz >= c)
+                continue;
+            if (maze[nx][ny][nz] == 1)
+                continue;
+            if (mark[nx][ny][nz] == true)
+                continue;
+
+            N temp;
+            temp.x = nx;
+            temp.y = ny;
+            temp.z = nz;
+            temp.t = now.t + 1;
+            Q.push(temp);
+            mark[nx][ny][nz] = true;
+            if (nx == a - 1 && ny == b - 1 && nz == c - 1){
+                return temp.t;
+            }
         }
     }
-    swap(left, getIndex);
-    return getIndex;
-}
 
-void quickSort(int left, int right){
-    if (right > left){
-        int getIndex = getPartition(left, right);
-        quickSort(left, getIndex - 1);
-        quickSort(getIndex + 1, right);
-    }
+    return -1;
 }
 
 int main(){
-    int n;
-    while(scanf("%d", &n) != EOF){
-        for(int i = 0; i < n; i++){
-            scanf("%lf %lf", &points[i][0], &points[i][1]);
-        }
-        int index = 0;
-        for(int i = 0; i < n; i++){
-            for(int j = i + 1; j < n; j++){
-                edges[index].sIndex = i;
-                edges[index].eIndex = j;
-                edges[index].length = getInstance(i, j);
-                index ++;
-            }
-        }
-
-        int allPath = (n * (n - 1)) / 2;
-        //printf("Edges: %d %d\n", index, allPath);
-        quickSort(0, allPath - 1);
-        for(int i = 0; i < allPath; i++){
-            Tree[i] = -1;
-            //printf("Edge: %lf %d %d\n", edges[i].length, edges[i].sIndex, edges[i].eIndex);
-        }
-        double answer = 0;
-        for(int i = 0; i < allPath; i++){
-            int a = edges[i].sIndex;
-            int b = edges[i].eIndex;
-            a = findRoot(a);
-            b = findRoot(b);
-            if (a != b){
-                Tree[a] = b;
-                answer += edges[i].length;
-            }
-        }
-
-        printf("%.2lf\n", answer);
-
+    int blocks;
+    scanf("%d", &blocks);
+    int a, b, c, t;
+    while(blocks --){
+        scanf("%d%d%d%d", &a, &b, &c, &t);
+        for(int i = 0; i < a; i++)
+            for(int j = 0; j < b; j++)
+                for(int k = 0; k < c; k++){
+                    scanf("%d", &maze[i][j][k]);
+                    mark[i][j][k] = false;
+                }
     }
+
+    while(Q.empty() == false) Q.pop();
+    mark[0][0][0] = true;
+    N temp;
+    temp.t = temp.x = temp.y = temp.z = 0;
+    Q.push(temp);
+    int result = BFS(a, b, c);
+    if ( result <= t) printf("%d\n", result);
+    else printf("-1\n");
+
+    return 0;
 }
+
