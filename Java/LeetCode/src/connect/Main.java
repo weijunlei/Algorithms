@@ -15,6 +15,6 @@ public class Main {
         root.right.left = new TreeLinkNode(6);
         root.right.right = new TreeLinkNode(7);
 
-        connect.
+        System.out.println("Hello World\n");
     }
 }
