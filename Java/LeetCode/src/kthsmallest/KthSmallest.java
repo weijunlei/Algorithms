@@ -16,13 +16,6 @@ public class KthSmallest {
         return result == null ? 0 : result.val;
     }
 
-    public int kthSmallest2(TreeNode root, int k){
-        if (root != null){
-            int result = kthSmallest2(root.left, k);
-            if 
-        }
-    }
-
     private TreeNode kthHelper(TreeNode root, int k){
         if (root != null){
             TreeNode node = kthHelper(root.left, k);
