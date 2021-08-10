@@ -7,6 +7,7 @@ public class Main {
     public static void main(String[] args) {
         Solution solution = new Solution();
         List<String> parentheses = Arrays.asList("()", ")()())");
+        Arrays.sort(new int[]{1, 2});
         for(int i = 0; i < parentheses.size(); i++){
             String getStr = parentheses.get(i);
             System.out.println("longest valid parentheses of " + getStr + " is: " + solution.longestValidParentheses(getStr));

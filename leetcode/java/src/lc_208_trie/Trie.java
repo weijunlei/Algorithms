@@ -13,7 +13,7 @@ class Trie {
     /** Inserts a word into the trie. */
     public void insert(String word) {
         Trie temp = this;
-        for(var ch: word.toCharArray()){
+        for(char ch: word.toCharArray()){
             if (temp.children[ch - 'a'] == null){
                 temp.children[ch - 'a'] = new Trie();
             }
@@ -25,7 +25,7 @@ class Trie {
     /** Returns if the word is in the trie. */
     public boolean search(String word) {
         Trie temp = this;
-        for(var ch: word.toCharArray()){
+        for(char ch: word.toCharArray()){
             if (temp.children[ch - 'a'] == null){
                 return false;
             }
@@ -37,7 +37,7 @@ class Trie {
     /** Returns if there is any word in the trie that starts with the given prefix. */
     public boolean startsWith(String prefix) {
         Trie temp = this;
-        for(var ch: prefix.toCharArray()){
+        for(char ch: prefix.toCharArray()){
             if (temp.children[ch - 'a'] == null){
                 return false;
             }

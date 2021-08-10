@@ -20,7 +20,7 @@ public class Solution {
             return true;
         }
         boolean hasMatch = false;
-        for(var neededStr: hashSet) {
+        for(String neededStr: hashSet) {
 //            System.out.println(s.substring(startIndex, startIndex + neededStr.length()));
             if (startIndex + neededStr.length() <= s.length() && s.substring(startIndex, startIndex + neededStr.length()).equalsIgnoreCase(neededStr)) {
                 hasMatch = hasMatch || wordBreakHelper(s, startIndex + neededStr.length(), hashSet);

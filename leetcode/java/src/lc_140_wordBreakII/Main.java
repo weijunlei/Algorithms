@@ -9,11 +9,11 @@ public class Main {
         String testStr = "catsandog";
         String[] strList = {"cats", "dog", "san", "and", "cat"};
         List<String> strDict = new LinkedList<>();
-        for(var str: strList) {
+        for(String str: strList) {
             strDict.add(str);
         }
         List<String> result = solution.wordBreak(testStr, strDict);
-        for(var res: result){
+        for(String res: result){
             System.out.println(res);
         }
     }

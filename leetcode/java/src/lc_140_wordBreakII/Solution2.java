@@ -24,7 +24,7 @@ public class Solution2 {
         for(int end=startIndex+1; end <= s.length(); end++){
             if(hashSet.contains(s.substring(startIndex, end))){
                 List<String> list = wordBreakHelper(s, hashSet, end);
-                for(var l: list){
+                for(String l: list){
                     if (l.equals("")){
                         temp.add(s.substring(startIndex, end));
                     } else{

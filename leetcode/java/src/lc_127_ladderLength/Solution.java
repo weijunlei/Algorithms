@@ -11,7 +11,7 @@ class Solution {
         Map<String, Boolean> hasVisit = new HashMap();
         Queue<Map<String, Integer>> queue = new LinkedList<>();
         hasVisit.put(beginWord, true);
-        queue.offer(new HashMap<>(){{put(beginWord, 1);}});
+        queue.offer(new HashMap<String, Integer>(){{put(beginWord, 1);}});
         for(String word: wordList){
             int l = word.length();
             if (!word.equals(beginWord)){
@@ -46,7 +46,7 @@ class Solution {
                         return getLevel + 1;
                     }
                     if (!hasVisit.get(getWord)){
-                        queue.offer(new HashMap<>(){{put(getWord, getLevel + 1);}});
+                        queue.offer(new HashMap<String, Integer>(){{put(getWord, getLevel + 1);}});
                         hasVisit.put(getWord, true);
                     }
                 }

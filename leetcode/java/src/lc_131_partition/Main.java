@@ -6,7 +6,7 @@ public class Main {
     public static void main(String[] args) {
         Solution2 solution = new Solution2();
         List<List<String>> res = solution.partition("abb");
-        for(var temp: res) {
+        for(List temp: res) {
             System.out.println(temp.toString());
         }
     }

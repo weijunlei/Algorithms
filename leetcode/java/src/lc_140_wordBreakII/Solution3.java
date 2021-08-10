@@ -19,7 +19,7 @@ public class Solution3 {
             List<String> temp = new LinkedList<>();
             for(int start=0; start < end; start++){
                 if (dps[start].size() > 0 && hashSet.contains(s.substring(start, end))){
-                    for(var l: dps[start]){
+                    for(String l: dps[start]){
                         temp.add(l + (l.equals("") ? "" : " ") + s.substring(start, end));
                     }
                 }
